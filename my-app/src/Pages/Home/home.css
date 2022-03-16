@@ -1,0 +1,27 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.home-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.home-grid {
+    background-color: #F3F3F3;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    padding: 15px;
+}
+
+@media all and (max-width: 767px)  {
+    .home-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
