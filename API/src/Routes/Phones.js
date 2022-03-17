@@ -1,39 +1,37 @@
 
 exports.phoneRoutes = (app,db) => {
-    app.get('/api/phones', async (req,res) => {
-/*         const course = courses.find(element => element.id === parseInt(req.params.id));
- */        
+    app.get('/api/phones', async (req,res) => {      
         let phoneData = await db.collection('phoneCatalog').get();
         let phoneList = [];
         if(!phoneData) {
             res.status(404).send("Ha habido algún error al pedir los teléfonos")
         } else {
            for (const phone of phoneData.docs) {
-               console.log('CARAMBOLA',phone)
-               debugger
                 let info = phone.data();
                 phoneList.push(info)
            }
-
-    }
-        
+        }
         res.send(phoneList) 
-  /*   if(!data) return res.status(404).send('El id del móvil no existe');
-        res.send(data); */
     });
     
     
     app.post('/api/createPhone', (req,res) =>{
-    
+        const newData = {
+            id: 5,
+            color: "amarillo",
+            description: "feo",
+            imageFileName: "",
+            manufacturer: "yo",
+            name: "Torero",
+            price: "Muchísmo",
+            processor: "jeje",
+            ram: "3",
+            screen: "grande"
+          }
         const {error} = validateCourse(req.body);
-        if(error) return res.status(400).send(error.details[0].message);
-    
-        const course = {
-            id: courses.length +1,
-            name: req.body.name
-        };
-        courses.push(course);
-        res.send(course);
+        let prueba =  db.collection('phoneCatalog').set(newData)
+        console.log(req)
+        res.send(prueba);
     });
     
     app.put('/api/editPhone/:id', (req,res)=>{

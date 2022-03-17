@@ -10,8 +10,19 @@ const getAllPhones = async () => {
   }
 }
 
+const createNewPhone = async () => {
+
+  try {
+    const createPhone = await axios.get('http://localhost:8080/api/createPhone')
+    console.log(createPhone)
+    
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 
 
 
-export {getAllPhones};
+
+export {getAllPhones, createNewPhone};
