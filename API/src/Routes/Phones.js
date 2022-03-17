@@ -1,9 +1,25 @@
 
-exports.phoneRoutes = (app) => {
-    app.get('/api/phones', (req,res)=>{
-        const course = courses.find(element => element.id === parseInt(req.params.id));
-        if(!course) return res.status(404).send('El id del móvil no existe');
-        res.send(course);
+exports.phoneRoutes = (app,db) => {
+    app.get('/api/phones', async (req,res) => {
+/*         const course = courses.find(element => element.id === parseInt(req.params.id));
+ */        
+        let phoneData = await db.collection('phoneCatalog').get();
+        let phoneList = [];
+        if(!phoneData) {
+            res.status(404).send("Ha habido algún error al pedir los teléfonos")
+        } else {
+           for (const phone of phoneData.docs) {
+               console.log('CARAMBOLA',phone)
+               debugger
+                let info = phone.data();
+                phoneList.push(info)
+           }
+
+    }
+        
+        res.send(phoneList) 
+  /*   if(!data) return res.status(404).send('El id del móvil no existe');
+        res.send(data); */
     });
     
     
@@ -47,3 +63,4 @@ exports.phoneRoutes = (app) => {
         res.send(course);
     })
 }
+

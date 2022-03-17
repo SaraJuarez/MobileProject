@@ -1,7 +1,21 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import './home.css';
 import Card from "../../Components/Organisms/Card/Card";
+import {getAllPhones} from "../../api/index";
 function Home () {
+
+    const [phonesList, setPhonesList] = useState([]);
+
+    const getPhonesInfo = async() => {
+        let phonesInfo = await getAllPhones();
+        console.log(phonesInfo)
+        setPhonesList(phonesInfo)
+    }
+      
+
+    useEffect(() => {
+        getPhonesInfo()
+    }, [])
 
     let items = [
         'lalala',

@@ -1,21 +1,23 @@
 const Joi = require('joi');
 const express = require('express');
-import { phoneRoutes } from './Routes/Phones';
+var cors = require('cors')
+const db = require('./assets/firebase/index');
+const phoneRoutes = require("./Routes/Phones");
+const data = require('./assets/data.json')
 const app = express();
 
 app.use(express.json());
 
-const courses = [
-    {id: 1, name: 'course1'},
-    {id: 2, name: 'course2'},
-    {id: 3, name: 'course3'},
-];
+app.use(cors())
+
+console.log(db)
 
 app.get('/', (req,res) => {
-    res.send('Working API')
+  /*   let info = db.collection('phoneCatalog'); */
+    res.send('API funcionando') 
 })
 
-phoneRoutes.phoneRoutes(app);
+phoneRoutes.phoneRoutes(app, db);
 
 function validateCourse (course){
     const schema = {
