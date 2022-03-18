@@ -23,6 +23,7 @@
 
 
 .crossIcon {
+    position: absolute;
     width: 24px;
 }
 

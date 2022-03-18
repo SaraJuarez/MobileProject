@@ -1,0 +1,27 @@
+.editModal-container {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    height: 450px;
+}
+
+.editModal-inputContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.editModal-title  {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+input  {
+    width: -webkit-fill-available;
+    border: none;
+    border-bottom: 1px solid #757577;
+}
+
+input:hover, input:focus {
+    outline: none;
+}

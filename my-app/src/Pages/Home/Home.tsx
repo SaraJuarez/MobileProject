@@ -10,6 +10,10 @@ function Home () {
         let phonesInfo = await getAllPhones();
         setPhonesList(phonesInfo)
     }
+
+    function editPhoneInfo(e:any) {
+        console.log(e)
+    }
       
     useEffect(() => {
         createNewPhone()
@@ -25,7 +29,7 @@ function Home () {
             <div className="home-grid">
                 {phonesList.map((item, index)=> {
                     return(
-                        <Card key={index} item={item}/>
+                        <Card editPhoneInfo={editPhoneInfo} key={index} item={item}/>
                     )
                 })}
             </div>

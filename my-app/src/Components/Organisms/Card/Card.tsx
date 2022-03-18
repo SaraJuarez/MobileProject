@@ -20,31 +20,32 @@ interface ListType {
 
 interface Props {
     item: ListType,
+    editPhoneInfo: any
 /*     edition?: boolean,
     styles?: any */
 } 
 
 function PhoneCard (props:Props) {
 
-    const {item} = props;
+    const {item, editPhoneInfo} = props;
 
     const [isFlipped, setIsFlipped] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [modalType, setModalType] = useState('')
 
     function flipCard () {
         setIsFlipped(!isFlipped)
     }
 
-    function openModal() {
+    function openModal(modalType: string) {
+        setModalType(modalType)
         setShowModal(!showModal)
-      }
+    }
     
-    let  content = <p>Jejeje</p>
-
     return(
         <Fragment>
             {showModal ?
-                <Modal openModal={openModal} content={content}/>
+                <Modal item={item} modalType={modalType} editPhoneInfo={editPhoneInfo} openModal={openModal}/>
                 : null
             }
             <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
@@ -65,7 +66,7 @@ function PhoneCard (props:Props) {
                     <p><span className="text-title">Processor:</span> {item.processor}</p>
                     <p><span className="text-title">Ram:</span> {item.ram}</p>
                     <p><span className="text-title">Screen:</span> {item.screen}</p>
-                    <Button flipFunction={flipCard} text="Volver atrás"/>
+                    <Button onClickFunction={flipCard} text="Volver atrás"/>
                 </div>
             </ReactCardFlip>
         </Fragment>

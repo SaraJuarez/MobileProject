@@ -3,14 +3,14 @@ import "./button.css";
 
 interface Props {
     text: string,
-    flipFunction: any
+    onClickFunction: any
 }   
 
 function Button (props: Props) {
-    const {text, flipFunction} = props;
+    const {text, onClickFunction} = props;
 
     return(
-        <div onClick={flipFunction}  className="button-container">
+        <div onClick={onClickFunction}  className="button-container">
             <p className="button-text">{text}</p>
         </div>
     )
