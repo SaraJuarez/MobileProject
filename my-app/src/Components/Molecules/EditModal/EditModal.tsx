@@ -24,28 +24,51 @@ interface Props {
 function EditModal (props:Props) {
     const {phoneInfo, openModal, editPhoneInfo} = props;
 
-    const [editedInfo, setEditedInfo] = useState({
-        id: phoneInfo.id,
-        color: phoneInfo.color,
-        description: phoneInfo.description,
-        imageFileName: phoneInfo.imageFileName,
-        manufacturer: phoneInfo.manufacturer,
-        name: phoneInfo.name,
-        price: phoneInfo.price,
-        processor: phoneInfo.processor,
-        ram: phoneInfo.ram,
-        screen: phoneInfo.screen
-    })
+    const [name, setNewName] = useState(phoneInfo.name);
+    const [color, setNewColor] = useState(phoneInfo.color);
+    const [description, setNewDescription] = useState(phoneInfo.description);
+    const [imageFileName, setNewImageFileName] = useState(phoneInfo.imageFileName);
+    const [manufacturer, setNewManufacturer]= useState(phoneInfo.manufacturer)
+    const [price, setNewPrice] = useState(phoneInfo.price);
+    const [processor, setNewProcessor] = useState(phoneInfo.processor);
+    const [ram, setNewRam] = useState(phoneInfo.ram);
+    const [screen, setNewScreen] = useState(phoneInfo.screen);
 
-    function getInfo(e:any) {
-        console.log(e.target.value)
-        console.log(e.target.type)
+    function getNewName(e:any) {
+        setNewName(e.target.value);
+    }
+    
+    function getNewManufacturer (e:any) {
+        setNewManufacturer(e.target.value)
     }
 
-    let mentira = {
-        name: 'nana',
-        jeje: 'nono'
+    function controlInfo () {
+        let editedPhoneObject = {
+            name: '',
+            id: phoneInfo.id,
+            color: '',
+            description: '',
+            imageFileName: '',
+            manufacturer: '',
+            price: '',
+            processor: '',
+            ram: '',
+            screen: ''
+
+        };
+        editedPhoneObject.name = name;
+        editedPhoneObject.color = color;
+        editedPhoneObject.description = description;
+        editedPhoneObject.imageFileName = imageFileName;
+        editedPhoneObject.manufacturer = manufacturer;
+        editedPhoneObject.price = price;
+        editedPhoneObject.processor = processor;
+        editedPhoneObject.ram = ram;
+        editedPhoneObject.screen = screen;
+        editPhoneInfo(editedPhoneObject)
     }
+
+
 
 
     return(
@@ -53,9 +76,9 @@ function EditModal (props:Props) {
             <p className='editModal-title'>Edit phone information</p>
             <div className='editModal-input'>
                 <p>Model</p>
-                <input placeholder={phoneInfo.name} onChange={getInfo} type='name'></input>
+                <input placeholder={phoneInfo.name} onChange={getNewName} type='name'></input>
                 <p>Manufacturer</p>
-                <input placeholder={phoneInfo.manufacturer} type="manufacturer"></input>
+                <input placeholder={phoneInfo.manufacturer} onChange={getNewManufacturer} type="manufacturer"></input>
                 <p>Color</p>
                 <input placeholder={phoneInfo.color} type='color'></input>
                 <p>Price</p>
@@ -69,8 +92,11 @@ function EditModal (props:Props) {
                 <p>Screen</p>
                 <input placeholder={phoneInfo.screen} type='screen'></input>
             </div>
-            <Button text='Aceptar' onClickFunction={editPhoneInfo(mentira)}/>
-            <Button text='Cancelar' onClickFunction={openModal}/>
+            <div className='editModal-buttonContainer'>
+                <Button text='Aceptar' onClickFunction={controlInfo}/>
+                <Button text='Cancelar' onClickFunction={openModal}/>
+            </div>
+
         </div>
     )
 }
