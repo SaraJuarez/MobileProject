@@ -3,7 +3,7 @@ import Button from '../../Atoms/Button/Button';
 import './editModal.css';
 
 interface itemType {
-    id: number,
+    id: string,
     color: string,
     description: string,
     imageFileName: string,

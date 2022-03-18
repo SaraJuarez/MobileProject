@@ -8,6 +8,7 @@ function Home () {
 
     const getPhonesInfo = async() => {
         let phonesInfo = await getAllPhones();
+        console.log(phonesInfo)
         setPhonesList(phonesInfo)
     }
 
@@ -27,11 +28,11 @@ function Home () {
                 <small>Discover what phone suits you!</small>
             </header>
             <div className="home-grid">
-                {phonesList.map((item, index)=> {
+             {/*    {phonesList.map((item, index)=> {
                     return(
                         <Card editPhoneInfo={editPhoneInfo} key={index} item={item}/>
                     )
-                })}
+                })} */}
             </div>
         </div>
     )

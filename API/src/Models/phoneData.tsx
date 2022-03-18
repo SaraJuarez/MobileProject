@@ -1,5 +1,5 @@
 export interface phoneType {
-    id: number,
+    id: string,
     color: string,
     description: string,
     imageFileName: string,

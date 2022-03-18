@@ -6,7 +6,7 @@ import CardFooter from "../../Molecules/CardFooter/CardFooter";
 import Button from "../../Atoms/Button/Button";
 import Modal from "../Modal/Modal";
 interface ListType {
-    id: number,
+    id: string,
     color: string,
     description: string,
     imageFileName: string,

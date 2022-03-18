@@ -16,32 +16,23 @@ exports.phoneRoutes = (app,db) => {
     });
     
     
-    app.post('/api/createPhone', (req,res) =>{
-        const newData = {
-            id: 5,
+    app.post('/api/createPhone', async (req,res) =>{
+
+        db.collection('phoneCatalog').doc().id;
+        db.collection('phoneCatalog').doc(id).set({
+            id: id,
             color: "amarillo",
             description: "feo",
             imageFileName: "",
             manufacturer: "yo",
-            name: "Torero",
+            name: "La prueba buena",
             price: "Muchísmo",
             processor: "jeje",
             ram: "3",
-            screen: "grande"
-        }
-   /*      const {error} = validateCourse(req.body);
-        let prueba =  db.collection('phoneCatalog').addDoc(newData)
-        console.log(req)
-        res.send(prueba); */
-        console.log(req)
-        console.log(res)
-     /*    db.collection("phoneCatalog").add(newData)
-        .then((docRef) => {
-            console.log("Document written with ID: ", docRef.id);
+            screen: "grande",
+            
         })
-        .catch((error) => {
-            console.error("Error adding document: ", error);
-        }); */
+
     });
     
     app.put('/api/editPhone/:id', (req,res)=>{
