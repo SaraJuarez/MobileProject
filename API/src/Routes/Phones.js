@@ -1,4 +1,5 @@
-
+/* const validateInfo = require('../utils/validateInfo');
+ */
 exports.phoneRoutes = (app,db) => {
     app.get('/api/phones', async (req,res) => {      
         let phoneData = await db.collection('phoneCatalog').get();
@@ -27,11 +28,20 @@ exports.phoneRoutes = (app,db) => {
             processor: "jeje",
             ram: "3",
             screen: "grande"
-          }
-        const {error} = validateCourse(req.body);
-        let prueba =  db.collection('phoneCatalog').set(newData)
+        }
+   /*      const {error} = validateCourse(req.body);
+        let prueba =  db.collection('phoneCatalog').addDoc(newData)
         console.log(req)
-        res.send(prueba);
+        res.send(prueba); */
+        console.log(req)
+        console.log(res)
+     /*    db.collection("phoneCatalog").add(newData)
+        .then((docRef) => {
+            console.log("Document written with ID: ", docRef.id);
+        })
+        .catch((error) => {
+            console.error("Error adding document: ", error);
+        }); */
     });
     
     app.put('/api/editPhone/:id', (req,res)=>{

@@ -10,10 +10,10 @@ const getAllPhones = async () => {
   }
 }
 
-const createNewPhone = async () => {
+const createNewPhone = async (newPhoneData) => {
 
   try {
-    const createPhone = await axios.get('http://localhost:8080/api/createPhone')
+    const createPhone = await axios.post('http://localhost:8080/api/createPhone')
     console.log(createPhone)
     
   } catch (error) {
