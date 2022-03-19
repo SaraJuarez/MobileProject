@@ -15,3 +15,16 @@
 .button-text {
     font-weight: bold;
 }
+
+@media all and (max-width: 767px)  {
+    .button-container {
+        width: 40px;
+        height: 20px;
+        padding: 3px 5px;
+    }
+
+    .button-text {
+        overflow: hidden;
+        white-space: nowrap;
+    }
+}

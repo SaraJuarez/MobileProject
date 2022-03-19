@@ -12,9 +12,9 @@ function CardFooter (props: Props) {
 
     return(
         <div className="cardFooter-container">
-            <Button text="Editar" onClickFunction={()=>showModalFunction('edit')}/>
-            <Button text="Borrar" onClickFunction={()=>showModalFunction('delete')}/>
-            <Button text="Ver más" onClickFunction={flipFunction}/>
+            <Button text="Edit" onClickFunction={()=>showModalFunction('edit')}/>
+            <Button text="Delete" onClickFunction={()=>showModalFunction('delete')}/>
+            <Button text="More" onClickFunction={flipFunction}/>
         </div>
     )
 }

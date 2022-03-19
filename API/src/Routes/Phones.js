@@ -17,27 +17,25 @@ exports.phoneRoutes = (app,db) => {
     
     
     app.post('/api/createPhone', async (req,res) =>{
-
-        db.collection('phoneCatalog').doc().id;
-        db.collection('phoneCatalog').doc(id).set({
-            id: id,
-            color: "amarillo",
-            description: "feo",
-            imageFileName: "",
-            manufacturer: "yo",
-            name: "La prueba buena",
-            price: "Muchísmo",
-            processor: "jeje",
-            ram: "3",
-            screen: "grande",
-            
-        })
-
+        let docRef = db.collection('phoneCatalog').doc();
+        let id = docRef.id; 
+        req.body.id = id;
+        await db.collection('phoneCatalog').doc(id).set(req.body);
+        res.status(204).send();
     });
     
-    app.put('/api/editPhone/:id', (req,res)=>{
-    
+
+    app.put('/api/editPhone', async (req,res)=>{
+        
         /* Ver si existe */
+        let phone = await db.collection('phone_catalog').doc(id).get();
+        if(!phone) {
+            res.status(404).send('That phone didnt exists');
+        } else {
+            await phone.set(data, {merge: true});
+            res.send(res)
+        }
+
         const course = courses.find(element => element.id === parseInt(req.params.id))
         /* Si no existe, retornamos 404 */
         if(!course) return res.status(404).send('El id del curso no existe');
@@ -51,15 +49,13 @@ exports.phoneRoutes = (app,db) => {
         res.send(course)
     })
     
-    app.delete('/deletePhone/:id',(req, res)=>{
-        /* Ver si existe */
-        const course = courses.find(element => element.id === parseInt(req.params.id))
-        /* Si no existe, retornamos 404 */
-        if(!course) return res.status(404).send('El id del curso no existe');
-        /* Borrar */
-        const index = courses.indexOf(course);
-        courses.splice(index,1);
-        res.send(course);
+    app.delete('/api/deletePhone', async (req, res)=>{
+        let phoneId = req.body.phoneId;
+        let phoneList = req.body.phoneList;
+        const phone = phoneList.find(element => element.id === phoneId)
+        if(!phone) return res.status(404).send('Phone id doesnt exists');
+        await db.collection('phoneCatalog').doc(phoneId).delete();
+        res.send(phone);
     })
 }
 

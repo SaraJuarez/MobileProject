@@ -31,3 +31,14 @@ input:hover, input:focus {
     justify-content: space-around;
     align-items: center;
 }
+
+.editModal-footer {
+    display: flex;
+    flex-direction: column;
+}
+
+.editModal-alert {
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+}

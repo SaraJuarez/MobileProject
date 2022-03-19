@@ -33,6 +33,16 @@
     height: 400px;
 }
 
+
+.backButton {
+    position: absolute;
+    bottom: 0px;
+    background-color: white;
+    padding-bottom: 15px;
+    padding-top: 10px;
+    width: 90%;
+}
+
 .card-image {
     width: 230px;
     height: 300px;
@@ -41,4 +51,37 @@
 .text-title {
     font-size: 18px;
     font-weight: bold;
+}
+
+@media all and (max-width: 767px)  {
+    .card-container {
+        height: 200px;
+    }
+
+    .card-backContainer {
+        height: 200px;
+        overflow-y: scroll;
+    }
+
+    .backButton {
+        position: absolute;
+        bottom: 0px;
+        background-color: white;
+        padding-bottom: 15px;
+        padding-top: 10px;
+        width: 90%;
+    }
+
+    .card-image {
+        width: 100px;
+        height: 130px;
+    }
+
+    .text-title {
+        font-size: 14px;
+    }
+
+    .text {
+        font-size: 12px;
+    }
 }

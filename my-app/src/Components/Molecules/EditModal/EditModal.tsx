@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import Button from '../../Atoms/Button/Button';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 import './editModal.css';
 
 interface itemType {
@@ -15,86 +17,146 @@ interface itemType {
     screen: string
 }
 
+interface LooseObject {
+    [key: string]: any
+}
+
 interface Props {
     phoneInfo: itemType,
-    editPhoneInfo: any,
-    openModal: any
+    editPhoneInfo?: any,
+    openModal: any,
+    type: string,
+    getNewPhoneInfo?: any
 } 
 
 function EditModal (props:Props) {
-    const {phoneInfo, openModal, editPhoneInfo} = props;
+    const {phoneInfo, openModal, editPhoneInfo, type, getNewPhoneInfo} = props;
 
-    const [name, setNewName] = useState(phoneInfo.name);
-    const [color, setNewColor] = useState(phoneInfo.color);
-    const [description, setNewDescription] = useState(phoneInfo.description);
-    const [imageFileName, setNewImageFileName] = useState(phoneInfo.imageFileName);
-    const [manufacturer, setNewManufacturer]= useState(phoneInfo.manufacturer)
-    const [price, setNewPrice] = useState(phoneInfo.price);
-    const [processor, setNewProcessor] = useState(phoneInfo.processor);
-    const [ram, setNewRam] = useState(phoneInfo.ram);
-    const [screen, setNewScreen] = useState(phoneInfo.screen);
+    const [name, setNewName] = useState(phoneInfo ? phoneInfo.name : '');
+    const [color, setNewColor] = useState(phoneInfo ? phoneInfo.color : '');
+    const [description, setNewDescription] = useState(phoneInfo ? phoneInfo.description : '');
+    const [imageFileName, setNewImageFileName] = useState(phoneInfo ? phoneInfo.imageFileName : '');
+    const [manufacturer, setNewManufacturer]= useState(phoneInfo ? phoneInfo.manufacturer : '')
+    const [price, setNewPrice] = useState(phoneInfo ? phoneInfo.price : '');
+    const [processor, setNewProcessor] = useState(phoneInfo ? phoneInfo.processor : '');
+    const [ram, setNewRam] = useState(phoneInfo ? phoneInfo.ram : '');
+    const [screen, setNewScreen] = useState(phoneInfo ? phoneInfo.screen : ''); 
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertText, setAlertText] = useState('');
 
-    function getNewName(e:any) {
+     function getNewName(e: React.ChangeEvent<HTMLInputElement>) {
         setNewName(e.target.value);
     }
     
     function getNewManufacturer (e:any) {
         setNewManufacturer(e.target.value)
+    } 
+
+    function getNewColor (e:any) {
+        setNewColor(e.target.value);
+    }
+
+    function getNewFileName (e:any) {
+        setNewImageFileName(e.target.value)
+    }
+
+    function getNewDescription(e:any) {
+        setNewDescription(e.target.value)
+    }
+
+    function getNewPrice ( e:any) {
+        setNewPrice(e.target.value);
+    }
+
+    function getNewProcessor ( e:any) {
+        setNewProcessor(e.target.value)
+    }
+
+    function getNewRam(e:any) {
+        setNewRam(e.target.value);
+    }
+
+    function getNewScreen( e:any) {
+        setNewScreen(e.target.value);
     }
 
     function controlInfo () {
-        let editedPhoneObject = {
-            name: '',
-            id: phoneInfo.id,
-            color: '',
-            description: '',
-            imageFileName: '',
-            manufacturer: '',
-            price: '',
-            processor: '',
-            ram: '',
-            screen: ''
+        let newPhoneObject = {
+            name: name,
+            color: color,
+            description: description,
+            imageFileName: imageFileName,
+            manufacturer: manufacturer,
+            price: price,
+            processor: processor,
+            ram: ram,
+            screen: screen,
 
         };
-        editedPhoneObject.name = name;
-        editedPhoneObject.color = color;
-        editedPhoneObject.description = description;
-        editedPhoneObject.imageFileName = imageFileName;
-        editedPhoneObject.manufacturer = manufacturer;
-        editedPhoneObject.price = price;
-        editedPhoneObject.processor = processor;
-        editedPhoneObject.ram = ram;
-        editedPhoneObject.screen = screen;
-        editPhoneInfo(editedPhoneObject)
+        if(type === 'edit') {
+            let editedPhoneObject : LooseObject = {};
+            editedPhoneObject = newPhoneObject;
+            editedPhoneObject.id = phoneInfo.id;
+            console.log(editedPhoneObject)
+            editPhoneInfo(editedPhoneObject) 
+        } else if (type === 'create'){
+            let k: keyof typeof newPhoneObject;
+            for (k in newPhoneObject) {
+                if(newPhoneObject[k] === '') {
+                    setAlertText(`${k} missing`);
+                    setShowAlert(true)
+                    return
+                } else {
+                    return getNewPhoneInfo(newPhoneObject)
+                }
+            }
+        }
     }
 
 
+
+
+
+    let title = type === 'edit' ? 'Edit phone information' : 'Create phone information';
 
 
     return(
         <div className='editModal-container'>
-            <p className='editModal-title'>Edit phone information</p>
+            <p className='editModal-title'>{title}</p>
             <div className='editModal-input'>
                 <p>Model</p>
-                <input placeholder={phoneInfo.name} onChange={getNewName} type='name'></input>
+                <input placeholder={name} onChange={getNewName} name='name' required={type === 'create'}/>
                 <p>Manufacturer</p>
-                <input placeholder={phoneInfo.manufacturer} onChange={getNewManufacturer} type="manufacturer"></input>
+                <input placeholder={manufacturer} onChange={getNewManufacturer} name="manufacturer" required={type === 'create'}/>
                 <p>Color</p>
-                <input placeholder={phoneInfo.color} type='color'></input>
+                <input placeholder={color} onChange={getNewColor} name='color' required={type === 'create'}/>
                 <p>Price</p>
-                <input placeholder={phoneInfo.price} type='price'></input>
+                <input placeholder={price} onChange={getNewPrice} name='price' required={type === 'create'}/>
                 <p>Description</p>
-                <input placeholder={phoneInfo.description} type='description'></input>
+                <input placeholder={description} onChange={getNewDescription} name='description' required={type === 'create'}/>
                 <p>Processor</p>
-                <input placeholder={phoneInfo.processor} type='processor'></input>
+                <input placeholder={processor} onChange={getNewProcessor} name='processor' required={type === 'create'}/>
                 <p>Ram</p>
-                <input placeholder={phoneInfo.ram} type='ram'></input>
+                <input placeholder={ram} onChange={getNewRam} name='ram' required={type === 'create'}/>
                 <p>Screen</p>
-                <input placeholder={phoneInfo.screen} type='screen'></input>
+                <input placeholder={screen} onChange={getNewScreen} name='screen' required={type === 'create'}/>
+                <p>Image</p>
+                <input placeholder={imageFileName} onChange={getNewFileName} name='imageFileName' required={type === 'create'}/>
             </div>
-            <div className='editModal-buttonContainer'>
-                <Button text='Aceptar' onClickFunction={controlInfo}/>
-                <Button text='Cancelar' onClickFunction={openModal}/>
+            <div className='editModal-footer'>
+                {showAlert ?
+                    <div className='editModal-alert'>
+                        <Stack sx={{ width: '100%' }} spacing={2}>
+                            <Alert severity="error"> {alertText}</Alert>
+                        </Stack>
+                    </div> 
+
+                    : null
+                }
+                <div className='editModal-buttonContainer'>
+                    <Button text='Aceptar' onClickFunction={controlInfo}/>
+                    <Button text='Cancelar' onClickFunction={openModal}/>
+                </div>
             </div>
 
         </div>

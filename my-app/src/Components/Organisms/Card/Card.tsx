@@ -20,14 +20,16 @@ interface ListType {
 
 interface Props {
     item: ListType,
-    editPhoneInfo: any
+    editPhoneInfo: any,
+    getNewPhoneInfo: any,
+    deletePhoneInfo: any
 /*     edition?: boolean,
     styles?: any */
 } 
 
 function PhoneCard (props:Props) {
 
-    const {item, editPhoneInfo} = props;
+    const {item, editPhoneInfo, getNewPhoneInfo, deletePhoneInfo} = props;
 
     const [isFlipped, setIsFlipped] = useState(false);
     const [showModal, setShowModal] = useState(false);
@@ -45,7 +47,7 @@ function PhoneCard (props:Props) {
     return(
         <Fragment>
             {showModal ?
-                <Modal item={item} modalType={modalType} editPhoneInfo={editPhoneInfo} openModal={openModal}/>
+                <Modal deletePhoneInfo={deletePhoneInfo} item={item} modalType={modalType} getNewPhoneInfo={getNewPhoneInfo} editPhoneInfo={editPhoneInfo} openModal={openModal}/>
                 : null
             }
             <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
@@ -55,18 +57,23 @@ function PhoneCard (props:Props) {
                     </div>
                     <div className="card-textContainer">
                         <p className="text"><span className="text-title">Model:</span> {item.name}</p>
-                        <p><span className="text-title">Manufacturer:</span> {item.manufacturer}</p>
-                        <p><span className="text-title">Price:</span> {item.price}</p>
+                        <p className="text"><span className="text-title">Manufacturer:</span> {item.manufacturer}</p>
+                        <p className="text"><span className="text-title">Price:</span> {item.price}</p>
                     </div>
                     <CardFooter showModalFunction={openModal} flipFunction={flipCard}/>
                 </div>
                 <div className="card-backContainer">
-                    <p><span className="text-title">Description:</span> {item.description}</p>
-                    <p><span className="text-title">Color:</span> {item.color}</p>
-                    <p><span className="text-title">Processor:</span> {item.processor}</p>
-                    <p><span className="text-title">Ram:</span> {item.ram}</p>
-                    <p><span className="text-title">Screen:</span> {item.screen}</p>
-                    <Button onClickFunction={flipCard} text="Volver atrás"/>
+                    <div className="backContainer-text">
+                        <p className="text"><span className="text-title">Description:</span> {item.description}</p>
+                        <p className="text"><span className="text-title">Color:</span> {item.color}</p>
+                        <p className="text"><span className="text-title">Processor:</span> {item.processor}</p>
+                        <p className="text"><span className="text-title">Ram:</span> {item.ram}</p>
+                        <p className="text"><span className="text-title">Screen:</span> {item.screen}</p>
+                    </div>
+                    <div className="backButton">
+                    <Button onClickFunction={flipCard} text="Back"/>
+
+                    </div>
                 </div>
             </ReactCardFlip>
         </Fragment>
