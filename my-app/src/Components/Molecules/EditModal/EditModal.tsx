@@ -44,41 +44,15 @@ function EditModal (props:Props) {
     const [showAlert, setShowAlert] = useState(false);
     const [alertText, setAlertText] = useState('');
 
-     function getNewName(e: React.ChangeEvent<HTMLInputElement>) {
-        setNewName(e.target.value);
-    }
-    
-    function getNewManufacturer (e:any) {
-        setNewManufacturer(e.target.value)
-    } 
-
-    function getNewColor (e:any) {
-        setNewColor(e.target.value);
-    }
-
-    function getNewFileName (e:any) {
-        setNewImageFileName(e.target.value)
-    }
-
-    function getNewDescription(e:any) {
-        setNewDescription(e.target.value)
-    }
-
-    function getNewPrice ( e:any) {
-        setNewPrice(e.target.value);
-    }
-
-    function getNewProcessor ( e:any) {
-        setNewProcessor(e.target.value)
-    }
-
-    function getNewRam(e:any) {
-        setNewRam(e.target.value);
-    }
-
-    function getNewScreen( e:any) {
-        setNewScreen(e.target.value);
-    }
+    function getNewName(e:any) {setNewName(e.target.value)}; 
+    function getNewManufacturer (e:any) {setNewManufacturer(e.target.value)}; 
+    function getNewColor (e:any) {setNewColor(e.target.value)};
+    function getNewFileName (e:any) {setNewImageFileName(e.target.value)};
+    function getNewDescription(e:any) {setNewDescription(e.target.value)};
+    function getNewPrice ( e:any) {setNewPrice(e.target.value)};
+    function getNewProcessor ( e:any) {setNewProcessor(e.target.value)};
+    function getNewRam(e:any) {setNewRam(e.target.value)};
+    function getNewScreen( e:any) {setNewScreen(e.target.value)};
 
     function controlInfo () {
         let newPhoneObject = {
@@ -97,8 +71,8 @@ function EditModal (props:Props) {
             let editedPhoneObject : LooseObject = {};
             editedPhoneObject = newPhoneObject;
             editedPhoneObject.id = phoneInfo.id;
-            console.log(editedPhoneObject)
             editPhoneInfo(editedPhoneObject) 
+            openModal()
         } else if (type === 'create'){
             let k: keyof typeof newPhoneObject;
             for (k in newPhoneObject) {
@@ -106,10 +80,10 @@ function EditModal (props:Props) {
                     setAlertText(`${k} missing`);
                     setShowAlert(true)
                     return
-                } else {
-                    return getNewPhoneInfo(newPhoneObject)
-                }
+                } 
             }
+            getNewPhoneInfo(newPhoneObject)
+            openModal()
         }
     }
 
@@ -127,7 +101,7 @@ function EditModal (props:Props) {
                 <p>Model</p>
                 <input placeholder={name} onChange={getNewName} name='name' required={type === 'create'}/>
                 <p>Manufacturer</p>
-                <input placeholder={manufacturer} onChange={getNewManufacturer} name="manufacturer" required={type === 'create'}/>
+                <input placeholder={manufacturer} onChange={getNewManufacturer} name='manufacturer' required={type === 'create'}/>
                 <p>Color</p>
                 <input placeholder={color} onChange={getNewColor} name='color' required={type === 'create'}/>
                 <p>Price</p>
@@ -147,7 +121,7 @@ function EditModal (props:Props) {
                 {showAlert ?
                     <div className='editModal-alert'>
                         <Stack sx={{ width: '100%' }} spacing={2}>
-                            <Alert severity="error"> {alertText}</Alert>
+                            <Alert severity='error'> {alertText}</Alert>
                         </Stack>
                     </div> 
 

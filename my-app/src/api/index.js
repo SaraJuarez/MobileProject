@@ -14,8 +14,6 @@ const createNewPhone = async (newPhoneData) => {
   try {
     const createPhone = await axios.post('http://localhost:8080/api/createPhone', newPhoneData);
     return createPhone;
-
-    
   } catch (error) {
     console.log(error)
   }
@@ -23,8 +21,8 @@ const createNewPhone = async (newPhoneData) => {
 
 const editPhone = async (editedPhoneInfo) => {
   try {
-    const editPhone = await axios.put('http://localhost:8080/api/editPhone/',  editedPhoneInfo)
-
+    const editPhone = await axios.put('http://localhost:8080/api/editPhone/',  editedPhoneInfo);
+    return editPhone;
   } catch (error) {
     console.log(error)
   }
@@ -44,4 +42,4 @@ const deletePhone = async(phoneId, phoneList) => {
   }
 }
 
-export {getAllPhones, createNewPhone, deletePhone};
+export {getAllPhones, createNewPhone, deletePhone, editPhone};

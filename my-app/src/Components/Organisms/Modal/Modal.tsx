@@ -1,7 +1,7 @@
-import React from "react";
-import "./modal.css";
+import React from 'react';
+import './modal.css';
 import CloseIcon from '@mui/icons-material/Close';
-import EditModal from "../../Molecules/EditModal/EditModal";
+import EditModal from '../../Molecules/EditModal/EditModal';
 import DeleteModal from '../../Molecules/DeleteModal/DeleteModal';
 
 function Modal(props: any) {
@@ -17,11 +17,11 @@ function Modal(props: any) {
     }
 
     return (
-        <div onClick={props.closeFunction} className="modal-container">
-            <div className="modal-subContainer">
-                <div className="modal-content">
-                    <div className="moda-crossIcon"  >
-                        <CloseIcon className="crossIcon" onClick={props.openModal}/>
+        <div onClick={props.closeFunction} className='modal-container'>
+            <div className='modal-subContainer'>
+                <div className='modal-content'>
+                    <div className='moda-crossIcon'  >
+                        <CloseIcon className='crossIcon' onClick={props.openModal}/>
                     </div>
                     {content}
                 </div>
