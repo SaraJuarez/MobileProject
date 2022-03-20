@@ -21,10 +21,12 @@
 @media all and (max-width: 767px)  { 
     .deleteModal-container {
         height: 200px;
+        justify-content: space-around;
     }
 
     .deleteModal-title {
         font-size: 18px;
+        text-align: center;
     }
 
 }

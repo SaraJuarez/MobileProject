@@ -1,34 +1,20 @@
 import React from 'react';
 import './deleteModal.css';
 import Button from '../../Atoms/Button/Button';
-
-interface itemType {
-    id: string,
-    color: string,
-    description: string,
-    imageFileName: string,
-    manufacturer: string,
-    name: string,
-    price: string,
-    processor: string,
-    ram: string,
-    screen: string
-}
+import {ListType} from '../../../Types/listType';
 interface Props {
     deletePhoneInfo: any,
-    item: itemType,
+    item: ListType,
     openModal: any
 }
 
 function DeleteModal (props:Props) {
     const {deletePhoneInfo, openModal, item} = props;
 
-
     function sendInfoToDelete () {
         openModal()
         deletePhoneInfo(item.id)
     }
-
 
     return(
         <div className='deleteModal-container'>

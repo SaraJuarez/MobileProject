@@ -30,6 +30,8 @@ input:hover, input:focus {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .editModal-footer {
@@ -41,4 +43,30 @@ input:hover, input:focus {
     margin-top: 20px;
     margin-bottom: 20px;
 
+}
+
+.editModal-image {
+    margin-top: 10px;
+    width: 230px;
+    height: 300px;
+    border-radius: 5px;
+}
+
+@media all and (max-width: 767px)  {
+    .editModal-container {
+        height: 300px;
+    }
+    
+    .editModal-title {
+        font-size: 16px;
+    }
+
+    .editModal-text {
+        font-size: 12px;
+    }
+
+    .editModal-image {
+        width: 100px;
+        height: 130px;
+    }
 }

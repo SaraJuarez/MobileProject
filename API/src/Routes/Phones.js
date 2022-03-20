@@ -17,7 +17,6 @@ exports.phoneRoutes = (app,db) => {
         let docRef = await db.collection('phoneCatalog').doc();
         let id = docRef.id; 
         req.body.id = id;
-        console.log(req.body)
         await db.collection('phoneCatalog').doc(id).set(req.body);
         res.status(201).send(req.body);
     });

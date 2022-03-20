@@ -5,21 +5,9 @@ import {getAllPhones, createNewPhone, deletePhone, editPhone} from '../../api/in
 import CircularProgress from '@mui/material/CircularProgress';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Modal from '../../Components/Organisms/Modal/Modal';
+import {ListType} from '../../Types/listType';
 
 function Home () {
-
-    interface itemType {
-        id: string,
-        color: string,
-        description: string,
-        imageFileName: string,
-        manufacturer: string,
-        name: string,
-        price: string,
-        processor: string,
-        ram: string,
-        screen: string
-    }
 
     const [phonesList, setPhonesList] = useState([]);
     const [showModalNew, setShowModalNew] = useState(false);
@@ -52,14 +40,14 @@ function Home () {
         }
     }
 
-    const editPhoneInfo = async (editedPhoneInfo:itemType) => {
+    const editPhoneInfo = async (editedPhoneInfo:ListType) => {
         let result = await editPhone(editedPhoneInfo);
 
         if(result!.status === 200) {
             let fullList : any = phonesList;
             setPhonesList([])
             let indexOldPhone = fullList.findIndex((element: any) => element.id === editedPhoneInfo.id);
-            let removeOld = fullList.splice(indexOldPhone,1);
+            fullList.splice(indexOldPhone,1);
             fullList.push(editedPhoneInfo)
             setPhonesList(fullList)
         } else if(result!.status === 404){
@@ -75,7 +63,7 @@ function Home () {
             let fullList = phonesList;
             setPhonesList([])
             let indexOldPhone = fullList.findIndex((element: any) => element.id === phoneId);
-            let removeOld = fullList.splice(indexOldPhone,1);
+            fullList.splice(indexOldPhone,1);
             setPhonesList(fullList)
         } else {
             console.log('Error delete')
@@ -106,9 +94,7 @@ function Home () {
                 <div className='home-loader'>
                     <CircularProgress className="circular-loader" size={60} />
                 </div>                  
-
             }
-     
         </div>
     )
 }

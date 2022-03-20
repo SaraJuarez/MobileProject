@@ -28,17 +28,14 @@
 }
 
 @media all and (max-width: 767px)  { 
-    .modal-container {
-        padding-left: 16px;
-        padding-right: 16px;
-    }
 
     .modal-subContainer {
         padding: 16px;
-        height: 200px;
+        height: 300px;
+        width: 80%;
     }
 
     .crossIcon {
-        width: 10px!important;
+        width: 20px!important;
     }
 }

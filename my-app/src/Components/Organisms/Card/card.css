@@ -38,7 +38,7 @@
     position: absolute;
     bottom: 0px;
     background-color: white;
-    padding-bottom: 15px;
+    padding-bottom: 21px;
     padding-top: 10px;
     width: 90%;
 }
@@ -46,6 +46,7 @@
 .card-image {
     width: 230px;
     height: 300px;
+    border-radius: 5px;
 }
 
 .text-title {

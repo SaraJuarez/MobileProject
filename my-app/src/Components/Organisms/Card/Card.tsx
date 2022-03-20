@@ -5,19 +5,7 @@ import ReactCardFlip from 'react-card-flip';
 import CardFooter from '../../Molecules/CardFooter/CardFooter';
 import Button from '../../Atoms/Button/Button';
 import Modal from '../Modal/Modal';
-interface ListType {
-    id: string,
-    color: string,
-    description: string,
-    imageFileName: string,
-    manufacturer: string,
-    name: string,
-    price: string,
-    processor: string,
-    ram: string,
-    screen: string
-}
-
+import {ListType} from '../../../Types/listType';
 interface Props {
     item: ListType,
     editPhoneInfo: any,

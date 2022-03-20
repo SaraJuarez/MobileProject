@@ -4,27 +4,14 @@ import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import './editModal.css';
 import {storage} from '../../../api/firebase/index';
-
-
-interface itemType {
-    id: string,
-    color: string,
-    description: string,
-    imageFileName: string,
-    manufacturer: string,
-    name: string,
-    price: string,
-    processor: string,
-    ram: string,
-    screen: string
-}
+import {ListType} from '../../../Types/listType';
 
 interface LooseObject {
     [key: string]: any
 }
 
 interface Props {
-    phoneInfo: itemType,
+    phoneInfo: ListType,
     editPhoneInfo?: any,
     openModal: any,
     type: string,
@@ -109,7 +96,6 @@ function EditModal (props:Props) {
                 .child(image.name)
                 .getDownloadURL()
                 .then((url:any) =>{
-                    console.log(url)
                     setNewImageFileName(url)
             })
         }); 
@@ -125,27 +111,27 @@ function EditModal (props:Props) {
         <div className='editModal-container'>
             <p className='editModal-title'>{title}</p>
             <div className='editModal-input'>
-                <p>Model</p>
+                <p className='editModal-text'>Model</p>
                 <input placeholder={name} onChange={getNewName} name='name' required={type === 'create'}/>
-                <p>Manufacturer</p>
+                <p className='editModal-text'>Manufacturer</p>
                 <input placeholder={manufacturer} onChange={getNewManufacturer} name='manufacturer' required={type === 'create'}/>
-                <p>Color</p>
+                <p className='editModal-text'>Color</p>
                 <input placeholder={color} onChange={getNewColor} name='color' required={type === 'create'}/>
-                <p>Price</p>
+                <p className='editModal-text'>Price</p>
                 <input placeholder={price} onChange={getNewPrice} name='price' required={type === 'create'}/>
-                <p>Description</p>
+                <p className='editModal-text'>Description</p>
                 <input placeholder={description} onChange={getNewDescription} name='description' required={type === 'create'}/>
-                <p>Processor</p>
+                <p className='editModal-text'>Processor</p>
                 <input placeholder={processor} onChange={getNewProcessor} name='processor' required={type === 'create'}/>
-                <p>Ram</p>
+                <p className='editModal-text'>Ram</p>
                 <input placeholder={ram} onChange={getNewRam} name='ram' required={type === 'create'}/>
-                <p>Screen</p>
+                <p className='editModal-text'>Screen</p>
                 <input placeholder={screen} onChange={getNewScreen} name='screen' required={type === 'create'}/>
-                <p>Image</p>
+                <p className='editModal-text'>Image</p>
                 <input onChange={getNewFileName} type={'file'} name='imageFileName' required={type === 'create'}/>
             
                 {imageFileName !== '' ?
-                  <img alt='Uploaded mobile' src={imageFileName}/>
+                  <img className='editModal-image' alt='Uploaded mobile' src={imageFileName}/>
                   :
                   <progress value={progress} max={'100'}/>
                 }
