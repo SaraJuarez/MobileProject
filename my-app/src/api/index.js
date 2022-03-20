@@ -1,8 +1,9 @@
+import {url} from '../constants';
 const axios = require('axios').default;
 
 const getAllPhones = async () => {
   try {
-    const allPhones = await axios.get('http://localhost:8080/api/phones')
+    const allPhones = await axios.get(`${url}/api/phones`)
     return allPhones.data;
 
   } catch(error) {
@@ -12,7 +13,7 @@ const getAllPhones = async () => {
 
 const createNewPhone = async (newPhoneData) => {
   try {
-    const createPhone = await axios.post('http://localhost:8080/api/createPhone', newPhoneData);
+    const createPhone = await axios.post(`${url}/api/createPhone`, newPhoneData);
     return createPhone;
   } catch (error) {
     console.log(error)
@@ -21,7 +22,7 @@ const createNewPhone = async (newPhoneData) => {
 
 const editPhone = async (editedPhoneInfo) => {
   try {
-    const editPhone = await axios.put('http://localhost:8080/api/editPhone/',  editedPhoneInfo);
+    const editPhone = await axios.put(`${url}/api/editPhone/`,  editedPhoneInfo);
     return editPhone;
   } catch (error) {
     console.log(error)
@@ -34,7 +35,7 @@ const deletePhone = async(phoneId, phoneList) => {
         phoneId: phoneId,
         phoneList: phoneList
       }
-        const deletePhone = await axios.delete('http://localhost:8080/api/deletePhone', {data: dataObject})
+        const deletePhone = await axios.delete(`${url}/api/deletePhone`, {data: dataObject})
         return deletePhone;
 
   } catch (error) {
