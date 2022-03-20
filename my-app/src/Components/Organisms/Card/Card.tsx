@@ -53,7 +53,7 @@ function Card (props:Props) {
             <ReactCardFlip isFlipped={isFlipped} flipDirection='horizontal'>
                 <div className='card-container'>
                     <div className='card-imageContainer'>
-                        <img alt='mobile' className='card-image' src={phoneImage}/>
+                        <img alt='mobile' className='card-image' src={item.imageFileName ? item.imageFileName : phoneImage}/>
                     </div>
                     <div className='card-textContainer'>
                         <p className='text'><span className='text-title'>Model:</span> {item.name}</p>
@@ -71,8 +71,7 @@ function Card (props:Props) {
                         <p className='text'><span className='text-title'>Screen:</span> {item.screen}</p>
                     </div>
                     <div className='backButton'>
-                    <Button onClickFunction={flipCard} text='Back'/>
-
+                        <Button onClickFunction={flipCard} text='Back'/>
                     </div>
                 </div>
             </ReactCardFlip>

@@ -33,7 +33,6 @@ function Home () {
         let phonesInfo = await getAllPhones();
         setPhonesList(phonesInfo)
     }
-
           
     useEffect(() => {
         getPhonesInfo();
@@ -58,12 +57,11 @@ function Home () {
 
         if(result!.status === 200) {
             let fullList : any = phonesList;
+            setPhonesList([])
             let indexOldPhone = fullList.findIndex((element: any) => element.id === editedPhoneInfo.id);
             let removeOld = fullList.splice(indexOldPhone,1);
-
- /*            let 
-            console.log(indexOldPhone) */
-            getPhonesInfo()
+            fullList.push(editedPhoneInfo)
+            setPhonesList(fullList)
         } else if(result!.status === 404){
             console.log('Phone id not found')
         } else {
@@ -74,7 +72,11 @@ function Home () {
     const deletePhoneInfo = async (phoneId: string) => {
         let result = await deletePhone(phoneId, phonesList)
         if(result!.status === 200) {
-            getPhonesInfo()
+            let fullList = phonesList;
+            setPhonesList([])
+            let indexOldPhone = fullList.findIndex((element: any) => element.id === phoneId);
+            let removeOld = fullList.splice(indexOldPhone,1);
+            setPhonesList(fullList)
         } else {
             console.log('Error delete')
         }

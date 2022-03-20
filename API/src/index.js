@@ -1,6 +1,6 @@
 const express = require('express');
 var cors = require('cors')
-const db = require('./assets/firebase/index');
+const db = require('./configs/firebase/index');
 const phoneRoutes = require("./Routes/Phones");
 const app = express();
 

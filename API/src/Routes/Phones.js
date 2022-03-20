@@ -1,5 +1,3 @@
-/* const validateInfo = require('../utils/validateInfo');
- */
 exports.phoneRoutes = (app,db) => {
     app.get('/api/phones', async (req,res) => {      
         let phoneData = await db.collection('phoneCatalog').get();
@@ -12,9 +10,8 @@ exports.phoneRoutes = (app,db) => {
                 phoneList.push(info)
            }
         }
-        res.send(phoneList) 
+        res.status(200).send(phoneList) 
     });
-    
     
     app.post('/api/createPhone', async (req,res) =>{
         let docRef = await db.collection('phoneCatalog').doc();
@@ -22,7 +19,7 @@ exports.phoneRoutes = (app,db) => {
         req.body.id = id;
         console.log(req.body)
         await db.collection('phoneCatalog').doc(id).set(req.body);
-        res.send(req.body);
+        res.status(201).send(req.body);
     });
     
 
@@ -44,7 +41,7 @@ exports.phoneRoutes = (app,db) => {
         const phone = phoneList.find(element => element.id === phoneId)
         if(!phone) return res.status(404).send('Phone id doesnt exists');
         await db.collection('phoneCatalog').doc(phoneId).delete();
-        res.send(phone);
+        res.status(200).send(phone);
     })
 }
 
