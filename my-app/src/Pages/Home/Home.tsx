@@ -76,7 +76,6 @@ function Home () {
             <header className='home-header'>
                 <h1>Phone Catalogue</h1>
                 <small>Discover what phone suits you!</small>
-                <p>Hola</p>
                 <AddCircleIcon onClick={openModal} className='addCircle'/>
             </header>
             {showModalNew ? 

@@ -148,8 +148,8 @@ function EditModal (props:Props) {
                     : null
                 }
                 <div className='editModal-buttonContainer'>
-                    <Button text='Aceptar' onClickFunction={controlInfo}/>
-                    <Button text='Cancelar' onClickFunction={openModal}/>
+                    <Button text='Accept' onClickFunction={controlInfo}/>
+                    <Button text='Cancel' onClickFunction={openModal}/>
                 </div>
             </div>
 
