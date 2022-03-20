@@ -1,4 +1,5 @@
-import { initializeApp } from 'firebase/app';
+ import firebase from 'firebase/compat/app';
+ import 'firebase/compat/storage';
 
 
 const firebaseConfig = {
@@ -12,5 +13,6 @@ const firebaseConfig = {
   };
   
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-export default app;
+firebase.initializeApp(firebaseConfig)
+const storage = firebase.storage();
+export {storage, firebase as default};

@@ -3,6 +3,8 @@ import Button from '../../Atoms/Button/Button';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import './editModal.css';
+import {storage} from '../../../api/firebase/index';
+
 
 interface itemType {
     id: string,
@@ -43,11 +45,11 @@ function EditModal (props:Props) {
     const [screen, setNewScreen] = useState(phoneInfo ? phoneInfo.screen : ''); 
     const [showAlert, setShowAlert] = useState(false);
     const [alertText, setAlertText] = useState('');
+    const [progress, setProgess] = useState(0);
 
     function getNewName(e:any) {setNewName(e.target.value)}; 
     function getNewManufacturer (e:any) {setNewManufacturer(e.target.value)}; 
     function getNewColor (e:any) {setNewColor(e.target.value)};
-    function getNewFileName (e:any) {setNewImageFileName(e.target.value)};
     function getNewDescription(e:any) {setNewDescription(e.target.value)};
     function getNewPrice ( e:any) {setNewPrice(e.target.value)};
     function getNewProcessor ( e:any) {setNewProcessor(e.target.value)};
@@ -88,6 +90,31 @@ function EditModal (props:Props) {
     }
 
 
+    function getNewFileName(e:any) {
+        let image = e.target.files[0];
+        const uploadTask = storage.ref(`images/${image.name}`).put(image);
+        uploadTask.on("state_changed",
+            (snapshot: any) => {
+                const imageProgress = Math.round(
+                    (snapshot._delegate.bytesTransferred/ snapshot._delegate.totalBytes) * 100
+                );
+                setProgess(imageProgress)
+            },
+            (error:any)=>{
+              console.log(error)
+            },
+            () =>{
+            storage
+                .ref('images')
+                .child(image.name)
+                .getDownloadURL()
+                .then((url:any) =>{
+                    console.log(url)
+                    setNewImageFileName(url)
+            })
+        }); 
+    }
+
 
 
 
@@ -115,7 +142,14 @@ function EditModal (props:Props) {
                 <p>Screen</p>
                 <input placeholder={screen} onChange={getNewScreen} name='screen' required={type === 'create'}/>
                 <p>Image</p>
-                <input placeholder={imageFileName} onChange={getNewFileName} name='imageFileName' required={type === 'create'}/>
+                <input onChange={getNewFileName} type={'file'} name='imageFileName' required={type === 'create'}/>
+            
+                {imageFileName !== '' ?
+                  <img alt='Uploaded mobile' src={imageFileName}/>
+                  :
+                  <progress value={progress} max={'100'}/>
+                }
+              
             </div>
             <div className='editModal-footer'>
                 {showAlert ?
